@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer')
-const Transport = require("nodemailer-sendinblue-transport");
 const pug = require('pug')
 const HtmlToText = require('html-to-text')
 
@@ -22,7 +21,7 @@ module.exports = class Email {
             //         pass: process.env.SIB_PASSWORD
             //     }
             // })
-            return nodemailer.createTransport(new Transport({ apiKey: process.env.SIB_API_KEY }))
+            //return nodemailer.createTransport(new Transport({ apiKey: process.env.SIB_API_KEY }))
         }
         // return nodemailer.createTransport({
         //     host: process.env.EMAIL_HOST,
@@ -32,7 +31,7 @@ module.exports = class Email {
         //         pass: process.env.EMAIL_PASSWORD
         //     }
         // });
-        return nodemailer.createTransport(new Transport({ apiKey: process.env.SIB_API_KEY }))
+        //return nodemailer.createTransport(new Transport({ apiKey: process.env.SIB_API_KEY }))
     }
     async send(template, subject) {
         const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
