@@ -1,6 +1,7 @@
 const Booking = require('../models/bookingModel')
 const Tour = require('../models/tourModel')
 const User = require('../models/userModel')
+const Review = require('../models/reviewModel')
 const AppError = require('../utils/appError')
 const catchAsync = require('../utils/catchAsync')
 
@@ -33,6 +34,13 @@ exports.getTour = catchAsync(async (req, res, next) => {
 
     if (!tour) {
         return next(new AppError('There is no tour with that name', 404))
+    }
+    if (res.locals.user) {
+        const bookings = await Booking.find({
+            user: res.locals.user.id,
+            tour: tour.id
+        });
+        res.locals.isBookedTour = bookings.length > 0;
     }
 
     res.status(200).render('tour', {
@@ -90,3 +98,21 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
         tours
     })
 })
+
+exports.getMyReviews = catchAsync(async (req, res, next) => {
+    const reviews = await Review.find({ user: req.user.id })
+        .select('-user')
+        .populate('tour');
+    res.status(200).render('review', {
+        title: 'My Reviews',
+        reviews
+    });
+});
+
+exports.getFavorites = catchAsync(async (req, res, next) => {
+    const favoriteTours = await User.findById(req.user.id).select('favorite');
+    res.status(200).render('overview', {
+        title: 'My Favorites',
+        tours: favoriteTours.favorite
+    });
+});

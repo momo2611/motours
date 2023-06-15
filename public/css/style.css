@@ -67,6 +67,10 @@ body {
   margin: 0 auto;
 }
 
+.ma-bt-sm {
+  margin-bottom: 2.5rem !important;
+}
+
 .ma-bt-md {
   margin-bottom: 3rem !important;
 }
@@ -228,6 +232,11 @@ body {
 }
 .btn--white::after {
   background-color: #fff;
+}
+
+.btn--red {
+  background-color: #ff5d5d;
+  color: #fff;
 }
 
 .btn--green {
@@ -1131,6 +1140,13 @@ body {
   grid-column-gap: 2rem;
   padding: 2.5rem 3rem;
 }
+.card__details--review {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 1.75rem;
+  grid-column-gap: 2rem;
+  padding: 2.5rem 3rem;
+}
 .card__sub-heading {
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -1321,4 +1337,18 @@ body {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
+}
+
+#favorite {
+  position: relative;
+  float: right;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+#favorite:hover {
+  transform: scale(1.1);
+}
+
+.favorite-on {
+  fill: #fd1a36;
 }

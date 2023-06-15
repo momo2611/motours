@@ -49,7 +49,13 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
         select: false
-    }
+    },
+    favorite: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Tour'
+        }
+    ]
 })
 
 userSchema.pre('save', async function (next) {

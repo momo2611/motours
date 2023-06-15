@@ -25,6 +25,15 @@ router.patch(
 );
 router.delete('/deleteMe', userController.deleteMe);
 
+router.get('/favorite', userController.favorites);
+
+router
+    .route('/favorite/:tourId')
+    .post(userController.addFavorite)
+    .delete(userController.removeFavorite);
+
+router.get('/favorite', userController.favorites);
+
 router.use(authController.restrictTo('admin'));
 
 router
